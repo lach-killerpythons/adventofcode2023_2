@@ -73,11 +73,9 @@ fn part1_game_file_reader() -> Result<(), std::io::Error> {
     Ok(())
 }
 
+// by default a function takes a copy -> take a mutable reference instead
 fn the_power(input: String, red: &mut i32, blue: &mut i32, green: &mut i32, )  { // red = 1, blue = 2, green = 3 : power = 1*2*3=6
-    //10 red, 5 blue, 1 green
-  /*   let mut red = 0;
-    let mut blue = 0;
-    let mut green = 0; */
+
     let games = input.split(",");    
     for game in games {
 
@@ -88,6 +86,7 @@ fn the_power(input: String, red: &mut i32, blue: &mut i32, green: &mut i32, )  {
         let n: i32 = choices[0].parse::<i32>().unwrap(); // 15   
         let color: &str = choices[1]; // "red"
                 
+        // de-reference after use to return ownership        
         match color {
             "red" => {
                 if n > *red {*red = n}
@@ -101,12 +100,6 @@ fn the_power(input: String, red: &mut i32, blue: &mut i32, green: &mut i32, )  {
             _ => panic!()
         }
     }
-/*     let output = red * blue * green;
-    println!("{} * {} * {} = {} ", red, green, blue, output);
-    output */
-
-    //let choices = input.split(" ").collect::<Vec<_>>(); // 
-    //let n = choices[0].parse::<i32>().unwrap(); // get number    
 
 }
 
@@ -153,9 +146,7 @@ fn clean_start_space(mut input: String) -> String {
 
 fn main() {
     
-    //part1_game_file_reader();
-    //let game_2_test = "10 red, 5 blue, 1 green".to_string();
-    //the_power(game_2_test); 
+    part1_game_file_reader();
 
     part2_game_file_reader();
 
